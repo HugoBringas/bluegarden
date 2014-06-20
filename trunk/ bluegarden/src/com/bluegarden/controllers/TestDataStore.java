@@ -1,7 +1,9 @@
 package com.bluegarden.controllers;
 
+import java.util.List;
+
 import javax.jdo.PersistenceManager;
-import javax.servlet.jsp.tagext.TryCatchFinally;
+import javax.jdo.Query;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,11 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bluegarden.dbo.PMF;
 import com.bluegarden.entities.User;
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.FetchOptions;
-import com.google.appengine.api.datastore.Query;
 
 @Controller
 @RequestMapping("test")
@@ -60,15 +57,33 @@ public class TestDataStore {
 	@RequestMapping(value = "/show")
 	public @ResponseBody
 	String show() {
-		DatastoreService dataStore = DatastoreServiceFactory
-				.getDatastoreService();
-		Query q = new Query("Users");
-		Entity e = dataStore.prepare(q)
-				.asList(FetchOptions.Builder.withLimit(1)).get(0);
+		PersistenceManager pmf = null;
+		Query query = null;
+		List<User> users = null;
+		try {
+			pmf = PMF.get().getPersistenceManager();
+			query = pmf.newQuery(User.class);
+			query.setFilter("userName == nameParameter");
+			query.declareParameters("String nameParameter");
 
-		return e.getProperty("email").toString() + " - "
-				+ e.getProperty("password");
+			users = (List<User>) query.execute("hugo");
 
+			if (users != null && users.size() != 0) {
+				return users.get(0).getUserName() + " password: " + users.get(0).getPassword();
+			}
+
+		} catch (Exception ex) {
+			return ex.getMessage();
+		} finally {
+			if (pmf != null) {
+				query.closeAll();
+				pmf.close();
+			}
+		}
+
+	
+
+		return "no users";
 	}
 
 }

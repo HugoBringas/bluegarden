@@ -27,7 +27,7 @@ public class LoginController {
 	 public String logSuccess()
 	 {
 		
-		 return "redirect:http://wwww.sankakucomplex.com";
+		 return "redirect:http://www.gamefaqs.com";
 		 
 	 }
 	 
