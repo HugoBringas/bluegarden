@@ -9,13 +9,24 @@
 </head>
 <body>
 <p>combos index</p>
-<form:form metho="POST" commandName="combo" action="combos/add" >
+<form:form metho="POST" commandName="combo" action="/combos/add" >
 <table>
 <tr>
 <td>Character Name:</td>
-<td> <form:input path="userName"></td>
-<td> <form:errors path="userName"></td>
+<td> <form:input path="character" /></td>
+<td> <form:errors path="character" /></td>
 </tr>
+<tr>
+<td>Combo:</td>
+<td> <form:input path="combo" /></td>
+<td> <form:errors path="combo" /></td>
+</tr>
+<tr>
+<td>Damage:</td>
+<td> <form:input path="damage" /></td>
+<td> <form:errors path="damage" /></td>
+</tr>
+
 <tr>
 <input type="submit" />
 </tr>
