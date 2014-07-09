@@ -9,22 +9,29 @@ public class ComboFacade implements IComboFacade {
 	private final IComboRepository comboRepository;
 
 	public ComboFacade(IComboRepository comboRepository) {
-	
+
 		this.comboRepository = comboRepository;
 	}
 
 	@Override
 	public void save(Combo combo) {
-		//logic here if is necessary
 		comboRepository.saveCombo(combo);
 	}
 
 	@Override
 	public List<Combo> getAllCombos() {
-		// TODO Auto-generated method stub
 		return comboRepository.getAllCombos();
 	}
 
+	@Override
+	public void deleteCombo(long id) {
+		comboRepository.deleteCombo(3);
 
+	}
+
+	@Override
+	public Combo getCombo(String key) {
+		return comboRepository.getCombo(key);
+	}
 
 }
