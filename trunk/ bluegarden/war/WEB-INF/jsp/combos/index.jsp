@@ -9,8 +9,8 @@
 </head>
 <body>
 <p>combos index</p>
-<form:form metho="POST" commandName="combo" action="/combos/add" >
 <table>
+<form:form metho="POST" commandName="combo" action="/combos/add" >
 <tr>
 <td>Character Name:</td>
 <td> <form:input path="character" /></td>
@@ -30,9 +30,8 @@
 <tr>
 <input type="submit" />
 </tr>
-</table>
 </form:form>
+</table>
 
-</form>
 </body>
 </html>

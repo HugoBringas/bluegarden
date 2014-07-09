@@ -1,4 +1,5 @@
 package com.bluegarden.entities;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Digits;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Combo {
@@ -21,7 +23,7 @@ public class Combo {
 	@NotEmpty
 	@Persistent
 	private String combo;
-	@Digits(integer=5, fraction=0, message="The value must be numeric and less than five digits")
+	@Digits(integer = 5, fraction = 0, message = "The value must be numeric and less than five digits")
 	@Persistent
 	private int damage;
 	@Persistent
@@ -38,6 +40,14 @@ public class Combo {
 		this.combo = combo;
 		this.damage = damage;
 		this.additionalInfo = additionalInfo;
+	}
+
+	public Key getKey() {
+		return key;
+	}
+
+	public void setKey(Key key) {
+		this.key = key;
 	}
 
 	public String getCharacter() {
@@ -70,6 +80,14 @@ public class Combo {
 
 	public void setAdditionalInfo(String additionalInfo) {
 		this.additionalInfo = additionalInfo;
+	}
+	
+	public String keyAsTring(){
+		if(key != null){
+			return KeyFactory.keyToString(key);
+		}else{
+			return "";
+		}
 	}
 
 }
