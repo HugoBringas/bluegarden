@@ -26,20 +26,21 @@
 
 				<%
 					if(request.getAttribute("combos") !=null){
-														List<Combo> list = (List<Combo>)request.getAttribute("combos");
-														for(Combo c : list){
+																		List<Combo> list = (List<Combo>)request.getAttribute("combos");
+																		for(Combo c : list){
 				%>
 				<tr>
 					<td><%=c.getCharacter()%></td>
 					<td><%=c.getCombo()%></td>
 					<td><%=c.getDamage()%></td>
-					<td><%=c.getAdditionalInfo()%></td>
-					<td><a
-						href="/combos/update/<%=KeyFactory.keyToString(c.getKey())%>">Update</a></td>
+					<td><%=c.getAdditionalInfo() == null ? "" : c.getAdditionalInfo()%></td>
+					<td>
+					<a href="/combos/update/<%=KeyFactory.keyToString(c.getKey())%>">Update</a> | <a href="/combos/delete/<%=KeyFactory.keyToString(c.getKey())%>">Delete</a>
+					</td>
 				</tr>
 				<%
 					}
-														}
+																		}
 				%>
 			</tbody>
 

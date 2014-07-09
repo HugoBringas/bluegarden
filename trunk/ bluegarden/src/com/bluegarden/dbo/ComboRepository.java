@@ -7,6 +7,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import com.bluegarden.entities.Combo;
+import com.google.appengine.api.datastore.KeyFactory;
 
 public class ComboRepository implements IComboRepository {
 
@@ -41,31 +42,12 @@ public class ComboRepository implements IComboRepository {
 	}
 
 	@Override
-	public void deleteCombo(int id) {
-		PersistenceManager manager = null;
-		Query query = null;
-		try {
-			manager = PMF.get().getPersistenceManager();
-			query = manager
-					.newQuery("DELETE FROM COMBO WHERE NAME =" + 4785074604081152L);
-		} finally {
-			if (query != null) {
-				query.closeAll();
-			}
-
-			if (manager != null) {
-				manager.close();
-			}
-		}
-	}
-
-	@Override
 	public Combo getCombo(String key) {
 		PersistenceManager manager = null;
 		Combo combo = null;
 		try {
 			manager = PMF.get().getPersistenceManager();
-		    combo = manager.getObjectById(Combo.class, key);
+			combo = manager.getObjectById(Combo.class, key);
 		} finally {
 			if (manager != null) {
 				manager.close();
@@ -73,6 +55,28 @@ public class ComboRepository implements IComboRepository {
 
 		}
 		return combo;
+	}
+
+	@Override
+	public void deleteCombo(String key) {
+		PersistenceManager manager = null;
+		Query query = null;
+		try {
+			manager = PMF.get().getPersistenceManager();
+			query = manager.newQuery(Combo.class);
+			query.setFilter("key == keyParam");
+			query.declareParameters("String keyParam");
+			query.deletePersistentAll(key);
+
+		} finally {
+			
+			if (manager != null) {
+				if(query != null){
+					query.closeAll();
+				}
+				manager.close();
+			}
+		}
 	}
 
 }

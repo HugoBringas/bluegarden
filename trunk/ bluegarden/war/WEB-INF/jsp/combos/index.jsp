@@ -28,6 +28,12 @@
 </tr>
 
 <tr>
+<td>Additional Info:</td>
+<td> <form:textarea path="additionalInfo" /></td>
+<td> <form:errors path="additionalInfo" /></td>
+</tr>
+
+<tr>
 <input type="submit" />
 </tr>
 </form:form>

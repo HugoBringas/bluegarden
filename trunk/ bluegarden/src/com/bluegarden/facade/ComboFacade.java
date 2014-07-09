@@ -24,8 +24,8 @@ public class ComboFacade implements IComboFacade {
 	}
 
 	@Override
-	public void deleteCombo(long id) {
-		comboRepository.deleteCombo(3);
+	public void deleteCombo(String key) {
+		comboRepository.deleteCombo(key);
 
 	}
 
