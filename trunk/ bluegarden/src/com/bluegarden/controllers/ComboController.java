@@ -28,7 +28,8 @@ public class ComboController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
 		modelMap.addAttribute("combo", new Combo());
-		return "/combos/index";
+		//return "combos/index";
+		return "views/testmasterjsp";
 	}
 
 	@RequestMapping(value = "add", method = RequestMethod.POST)
@@ -37,7 +38,7 @@ public class ComboController {
 			comboFacade.save(combo);
 			return "redirect:/combos/list";
 		} else {
-			return "/combos/index";
+			return "combos/index";
 		}
 	}
 
@@ -50,7 +51,7 @@ public class ComboController {
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String comboList(ModelMap modelMap) {
 		modelMap.addAttribute("combos", comboFacade.getAllCombos());
-		return "/combos/list";
+		return "combos/list";
 	}
 
 	@RequestMapping(value = "update/{key}", method = RequestMethod.GET)
@@ -60,7 +61,7 @@ public class ComboController {
 		// the datastore
 		modelMap.addAttribute("combo", combo);
 
-		return "/combos/update";
+		return "combos/update";
 	}
 
 	@RequestMapping(value = "save/{yolo}", method = RequestMethod.POST)
@@ -72,7 +73,7 @@ public class ComboController {
 			comboFacade.save(combo);
 			return "redirect:/combos/list";
 		} else {
-			return "/combos/update";
+			return "combos/update";
 		}
 
 	}
