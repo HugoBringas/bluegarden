@@ -24,7 +24,7 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
 
 public class GaeAuthenticationFilter extends GenericFilterBean {
-	private static final String REGISTRATION_URL = "/register.htm";
+	private static final String REGISTRATION_URL = "/";
 	private AuthenticationDetailsSource ads;
 	private AuthenticationManager authenticationManager;
 	private AuthenticationFailureHandler failureHandler;
@@ -51,13 +51,13 @@ public class GaeAuthenticationFilter extends GenericFilterBean {
 				// User has returned after authenticating through GAE. Need to
 				// authenticate to Spring Security.
 				PreAuthenticatedAuthenticationToken token = new PreAuthenticatedAuthenticationToken(
-						googleUser,null);
+						googleUser, null);
 				token.setDetails(ads.buildDetails(request));
-		
+
 				try {
 					authentication = authenticationManager.authenticate(token);
 					// Setup the security context
-					SecurityContextHolder.getContext().setAuthentication(
+ 					SecurityContextHolder.getContext().setAuthentication(
 							authentication);
 					// Send new users to the registration page.
 					if (authentication.getAuthorities().contains(
