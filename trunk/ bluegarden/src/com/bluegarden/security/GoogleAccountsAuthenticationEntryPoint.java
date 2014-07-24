@@ -20,9 +20,6 @@ public class GoogleAccountsAuthenticationEntryPoint implements
 			throws IOException, ServletException {
 		UserService userService = UserServiceFactory.getUserService();
 		String uri = userService.createLoginURL(request.getRequestURI());
-
-		String requestUri = request.getRequestURI();
-
 		response.sendRedirect(uri);
 	}
 

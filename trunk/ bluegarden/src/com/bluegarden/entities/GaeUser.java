@@ -13,6 +13,8 @@ import com.bluegarden.security.AppRole;
 import com.google.appengine.api.datastore.Key;
 import javax.jdo.PersistenceManager;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class GaeUser implements Serializable {
 
@@ -22,12 +24,20 @@ public class GaeUser implements Serializable {
 	private Key key;
 	@Persistent
 	private String userName;
+	// @NotEmpty
 	@Persistent
 	private String password;
 	@Persistent
 	private Set<AppRole> authorities;
 	@Persistent
 	private String googleId;
+	// @NotEmpty
+	@Persistent
+	private String blueGardenNickName;
+
+	public GaeUser() {
+
+	}
 
 	public GaeUser(String userName, String password) {
 		this.userName = userName;
@@ -38,6 +48,15 @@ public class GaeUser implements Serializable {
 		this.userName = userName;
 		this.authorities = authorities;
 		this.googleId = googleId;
+	}
+
+	public GaeUser(String userName, String password, Set<AppRole> authorities,
+			String googleId, String blueGardenNickName) {
+		this.userName = userName;
+		this.password = password;
+		this.authorities = authorities;
+		this.googleId = googleId;
+		this.blueGardenNickName = blueGardenNickName;
 	}
 
 	public String getUserName() {
@@ -66,6 +85,14 @@ public class GaeUser implements Serializable {
 
 	public void setGoogleId(String googleId) {
 		this.googleId = googleId;
+	}
+
+	public String getBlueGardenNickName() {
+		return blueGardenNickName;
+	}
+
+	public void setBlueGardenNickName(String blueGardenNickName) {
+		this.blueGardenNickName = blueGardenNickName;
 	}
 
 }

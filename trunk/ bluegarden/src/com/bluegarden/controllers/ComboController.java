@@ -29,7 +29,7 @@ public class ComboController {
 	public String index(ModelMap modelMap) {
 		modelMap.addAttribute("combo", new Combo());
 		//return "combos/index";
-		return "views/testmasterjsp";
+		return "combos/index";
 	}
 
 	@RequestMapping(value = "add", method = RequestMethod.POST)

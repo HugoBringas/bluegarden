@@ -17,7 +17,7 @@
 
 	<mvc:resources location="/resources/**" mapping="/resources/" />
 	<mvc:resources mapping="/scripts/**" location="/scripts/" />
-
+	
 
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -32,6 +32,12 @@
 		id="messageSource">
 		<property name="basename" value="messages" />
 	</bean>
+	
+	<!-- Multipart config -->
+<bean id="multipartResolver" class="org.gmr.web.multipart.GMultipartResolver">
+    <property name="maxUploadSize" value="1048576" />
+</bean>
+	<!-- Multipart end -->
 
 	<!-- spring di begins -->
 

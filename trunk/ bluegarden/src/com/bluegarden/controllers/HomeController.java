@@ -9,6 +9,6 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String getIndex() {
-		return "index2";
+		return "welcome";
 	}
 }
